@@ -1,0 +1,771 @@
+Reset and base styles
+{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  width: 100%;
+  height: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
+}
+
+/* Main app container */
+.app-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+/* Dashboard header */
+.dashboard-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 15px 20px;
+  border-bottom: 2px solid #e0e0e0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.dashboard-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.dashboard-subtitle {
+  font-size: 14px;
+  font-weight: 400;
+  color: #7f8c8d;
+  margin-top: 5px;
+}
+
+/* Map container */
+.map-container {
+  position: absolute;
+  top: 80px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+}
+
+/* Vehicle sidebar */
+.vehicle-sidebar {
+  position: absolute;
+  top: 90px;
+  right: 15px;
+  width: 320px;
+  max-height: 450px;
+  background: rgba(255, 255, 255, 0.97);
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  overflow-y: auto;
+  z-index: 1000;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.sidebar-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #2c3e50;
+  border-bottom: 2px solid #3498db;
+  padding-bottom: 8px;
+  margin-bottom: 15px;
+}
+
+.vehicle-item {
+  padding: 12px;
+  margin: 8px 0;
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.vehicle-item:hover {
+  background: #e3f2fd;
+  border-color: #2196f3;
+  transform: translateY(-1px);
+}
+
+.vehicle-item.selected {
+  background: #e3f2fd;
+  border-color: #2196f3;
+  box-shadow: 0 2px 8px rgba(33, 150, 243, 0.3);
+}
+
+.vehicle-name {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+.vehicle-coordinates {
+  font-size: 12px;
+  color: #7f8c8d;
+}
+
+.vehicle-time {
+  font-size: 11px;
+  color: #95a5a6;
+}
+
+.no-vehicles {
+  text-align: center;
+  font-size: 14px;
+  font-style: italic;
+  color: #7f8c8d;
+  padding: 30px 20px;
+}
+
+/* Vehicle markers */
+.vehicle-marker {
+  cursor: pointer;
+  transform: translate(-50%, -50%);
+  transition: all 0.2s ease;
+  pointer-events: auto;
+  user-select: none;
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+}
+
+
+
+
+.vehicle-marker:hover {
+  transform: translate(-50%, -50%) scale(1.2);
+}
+
+.car-icon {
+  color: #2196f3;
+  filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3));
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+}
+
+.car-icon.selected {
+  color: #ff4444;
+}
+
+/* Popup */
+.vehicle-popup .maplibregl-popup-content {
+  background: #fff;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.popup-content {
+  padding: 15px;
+  min-width: 200px;
+  font-size: 14px;
+}
+
+.popup-header {
+  font-size: 16px;
+  font-weight: bold;
+  color: #2c3e50;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #ecf0f1;
+  padding-bottom: 8px;
+}
+
+.popup-section {
+  margin-bottom: 8px;
+}
+
+.popup-footer {
+  font-size: 12px;
+  color: #7f8c8d;
+  margin-top: 10px;
+  border-top: 1px solid #ecf0f1;
+  padding-top: 8px;
+}
+
+/* Status indicator */
+.status-indicator {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  padding: 8px 15px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #fff;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.status-indicator.active {
+  background: rgba(76, 175, 80, 0.9);
+}
+
+.status-indicator.waiting {
+  background: rgba(255, 193, 7, 0.9);
+}
+
+
+/* Authentication buttons */
+.auth-buttons {
+  position: absolute;
+  top: 15px;     /* aligns with header padding */
+  right: 20px;   /* aligns with header padding */
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  z-index: 1100; /* above sidebar/map */
+}
+
+.auth-buttons .button {
+  border: none;
+  padding: 8px 14px;
+  border-radius: 5px;
+  color: white;
+  font-weight: 500;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.auth-buttons .button:focus {
+  outline: none;
+}
+
+.auth-buttons .login {
+  background-color: teal;
+}
+
+.auth-buttons .login:hover {
+  background-color: #006666;
+}
+
+.auth-buttons .register {
+  background-color: slateblue;
+}
+
+.auth-buttons .register:hover {
+  background-color: #483d8b;
+}
+
+.auth-buttons .logout {
+  background-color: tomato;
+}
+
+.auth-buttons .logout:hover {
+  background-color: #cc4125;
+}
+
+/*newcode */
+
+/* Auth Container (Login Screen) */
+.auth-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.auth-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.auth-header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.auth-header p {
+  font-size: 1.2rem;
+  opacity: 0.9;
+}
+
+.auth-buttons-center {
+  display: flex;
+  gap: 20px;
+}
+
+
+
+.auth-buttons {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.welcome-text {
+  font-weight: 500;
+  color: #495057;
+  margin-right: 10px;
+}
+
+/* Button Styles */
+.button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+  min-width: 80px;
+}
+
+.button.login {
+  background-color: #007bff;
+  color: white;
+}
+
+.button.login:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,123,255,0.3);
+}
+
+.button.register {
+  background-color: #28a745;
+  color: white;
+}
+
+.button.register:hover {
+  background-color: #218838;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(40,167,69,0.3);
+}
+
+.button.logout {
+  background-color: #dc3545;
+  color: white;
+}
+
+.button.logout:hover {
+  background-color: #c82333;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(220,53,69,0.3);
+}
+
+/* Modal Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  width: 90%;
+  max-width: 400px;
+  color: #333;
+}
+
+.modal-content h3 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #2c3e50;
+  font-size: 1.5rem;
+}
+
+.modal-content form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.modal-content input {
+  padding: 12px;
+  border: 2px solid #e9ecef;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: border-color 0.3s ease;
+}
+
+.modal-content input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0,123,255,0.1);
+}
+
+.modal-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.modal-buttons .button {
+  flex: 1;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .auth-buttons {
+    position: static;
+    margin-top: 15px;
+    justify-content: center;
+  }
+  
+  .dashboard-header {
+    text-align: center;
+    padding: 15px;
+  }
+  
+  .auth-buttons-center {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .modal-content {
+    margin: 20px;
+  }
+}
+
+/* latest code */
+
+/* Add these styles to your existing app.css */
+
+/* Loading States */
+.loading-spinner-large {
+  width: 50px;
+  height: 50px;
+  border: 4px solid #e9ecef;
+  border-top: 4px solid #007bff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 20px;
+}
+
+.loading-indicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 15px;
+  background: #e7f3ff;
+  border: 1px solid #b3d9ff;
+  border-radius: 6px;
+  color: #0066cc;
+  font-size: 0.9rem;
+  margin-bottom: 15px;
+}
+
+.loading-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid transparent;
+  border-top: 2px solid currentColor;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+/* Error States */
+.error-banner {
+  background: #f8d7da;
+  color: #721c24;
+  padding: 10px 15px;
+  border: 1px solid #f5c6cb;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  margin-bottom: 15px;
+}
+
+.error-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: #f8f9fa;
+  color: #495057;
+  padding: 20px;
+}
+
+.error-container .error-message {
+  background: #f8d7da;
+  color: #721c24;
+  padding: 15px 20px;
+  border-radius: 8px;
+  border: 1px solid #f5c6cb;
+  margin-bottom: 20px;
+  text-align: center;
+  max-width: 400px;
+}
+
+.retry-button, .logout-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  margin: 5px;
+  transition: all 0.3s ease;
+}
+
+.retry-button {
+  background: #007bff;
+  color: white;
+}
+
+.retry-button:hover {
+  background: #0056b3;
+  transform: translateY(-1px);
+}
+
+.logout-button {
+  background: #6c757d;
+  color: white;
+}
+
+.logout-button:hover {
+  background: #545b62;
+  transform: translateY(-1px);
+}
+
+/* Updated Dashboard Header */
+.dashboard-subtitle {
+  margin: 0;
+  color: #6c757d;
+  font-size: 1rem;
+}
+
+/* Animation */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Improved Modal Overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(4px);
+}
+
+.modal-content {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  width: 90%;
+  max-width: 400px;
+  color: #333;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+/* Enhanced Auth Container */
+.auth-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 20px;
+}
+
+.auth-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.auth-header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  font-weight: 600;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.auth-header p {
+  font-size: 1.2rem;
+  opacity: 0.9;
+}
+
+.auth-buttons-center {
+  display: flex;
+  gap: 20px;
+}
+
+/* Responsive Updates */
+@media (max-width: 768px) {
+  .auth-header h1 {
+    font-size: 2rem;
+  }
+  
+  .auth-buttons-center {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  .modal-content {
+    margin: 20px;
+    padding: 25px;
+  }
+}
+
+/* Updated vehicle item styles with improved remove button positioning */
+.vehicle-item {
+  padding: 12px;
+  margin: 8px 0;
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative; /* Enable absolute positioning for the remove button */
+}
+
+.vehicle-item:hover {
+  background: #e3f2fd;
+  border-color: #2196f3;
+  transform: translateY(-1px);
+}
+
+.vehicle-item.selected {
+  background: #e3f2fd;
+  border-color: #2196f3;
+  box-shadow: 0 2px 8px rgba(33, 150, 243, 0.3);
+}
+
+.vehicle-item.deleting {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* Beautiful remove button positioned in top right */
+.vehicle-remove-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 24px;
+  height: 24px;
+  border: none;
+  border-radius: 50%;
+  background: #ff4757;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(255, 71, 87, 0.3);
+  opacity: 0;
+  transform: scale(0.8);
+  z-index: 10;
+}
+
+/* Show remove button on hover */
+.vehicle-item:hover .vehicle-remove-btn {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.vehicle-remove-btn:hover {
+  background: #ff3838;
+  transform: scale(1.1);
+  box-shadow: 0 3px 8px rgba(255, 71, 87, 0.4);
+}
+
+.vehicle-remove-btn:active {
+  transform: scale(0.95);
+}
+
+/* Disabled state for remove button */
+.vehicle-remove-btn:disabled {
+  background: #95a5a6;
+  cursor: not-allowed;
+  animation: spin 1s linear infinite;
+}
+
+/* Adjust vehicle content to avoid overlap with button */
+.vehicle-content {
+  padding-right: 35px; /* Make room for the remove button */
+}
+
+.vehicle-name {
+  font-weight: bold;
+  color: #2c3e50;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+}
+
+.vehicle-coordinates {
+  font-size: 12px;
+  color: #7f8c8d;
+  margin-bottom: 2px;
+}
+
+.vehicle-time {
+  font-size: 11px;
+  color: #95a5a6;
+}
+
+/* Animation for spinning loading state */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Enhanced hover effects */
+.vehicle-item:hover .vehicle-remove-btn {
+  animation: none;
+}
+
+/* Alternative style - always visible but subtle */
+.vehicle-remove-btn.always-visible {
+  opacity: 0.4;
+  transform: scale(0.9);
+}
+
+.vehicle-item:hover .vehicle-remove-btn.always-visible {
+  opacity: 1;
+  transform: scale(1);
+}
